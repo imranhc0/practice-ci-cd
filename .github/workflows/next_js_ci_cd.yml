@@ -16,6 +16,6 @@ jobs:
     - name: Go to source code directory
       run: cd /var/www/practice-ci-cd/
     - name: Pull from repo
-      run: sudo git pull
+      run: sudo git pull origin main
     - name: Build
       run: npm run build
