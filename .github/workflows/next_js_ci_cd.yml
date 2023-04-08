@@ -11,9 +11,7 @@ permissions:
 
 jobs:
   build:
-
     runs-on: self-hosted
-
     steps:
     - name: Go to source code directory
       run: cd /var/www/practice-ci-cd/
@@ -21,8 +19,6 @@ jobs:
       run: git pull origin main
     - name: Build
       run: npm run build
-    - name: Start
-      run: npm run start
     - name: Restart Production Server
       run: sudo service nginx restart
     - name: Status
