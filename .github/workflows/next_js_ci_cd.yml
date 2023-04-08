@@ -19,7 +19,3 @@ jobs:
       run: sudo git pull
     - name: Build
       run: npm run build
-    - name: Restart Production Server
-      run: sudo service nginx restart
-    - name: Status
-      run: sudo systemctl nginx status 
