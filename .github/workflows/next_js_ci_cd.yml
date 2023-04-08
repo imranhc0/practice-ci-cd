@@ -15,6 +15,7 @@ jobs:
     steps:
     - name: Go to source code directory
       run: cd /var/www/practice-ci-cd/
+    - name: reset hard
       run: git reset --hard
     - name: Repo Status
       run: git status
