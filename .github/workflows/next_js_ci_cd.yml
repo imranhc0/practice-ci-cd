@@ -1,0 +1,29 @@
+name: next js application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - name: Go to source code directory
+      run: cd /var/www/practice-ci-cd/
+    - name: Pull from repo
+      run: git pull origin main
+    - name: Build
+      run: npm run build
+    - name: Start
+      run: npm run start
+    - name: Restart Production Server
+      run: sudo service nginx restart
+    - name: Status
+      run: sudo systemctl nginx status 
