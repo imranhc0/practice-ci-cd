@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'practice',
       script: 'npm',
-      args: 'start',
+      args: 'run dev',
       instances: 'max',
       autorestart: true,
       watch: false,
