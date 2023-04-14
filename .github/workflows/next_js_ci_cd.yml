@@ -13,15 +13,15 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
+    - name: Permitted as Root USER
+      run : sudo su
     - name: Go to source code directory
       run: cd /var/www/practice-ci-cd/
-    - name: reset hard
-      run: git reset --hard
-    - name: Repo Status
-      run: git status
-    - name: Add all the files
-      run: git add .
     - name: Pull from repo
-      run: sudo git pull origin main
+      run: sudo git pull
     - name: Build
       run: npm run build
+    - name: Restart PM2 Worker 
+      run : pm2 restart all
+    - name: Showing Logs
+      run : pm2 logs
