@@ -1,35 +1,35 @@
-name: Deploy to Server
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main
+      - main # replace with the name of your main branch
+  pull_request:
+    branches:
+      - main # replace with the name of your main branch
 
 jobs:
-  deploy:
-    runs-on: self-hosted
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code and copy to app directory
+      uses: actions/checkout@v2
+      with:
+        ref: main
+        path: /var/www/practice-ci-cd
+    - name: root user
+      run : sudo su
+    - name: Build and test
+      run: |
+        cd /var/www/practice-ci-cd
+        npm install
+        npm run build
+      
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Restart Production Server
+      run : pm2 restart practice
+  
 
-      - name: Install dependencies
-        run: |
-          npm install
-
-      - name: Build application
-        run: |
-          npm run build
-
-      - name: Copy files to server
-        uses: appleboy/rsync-action@master
-        with:
-          args: -rltgoDzv --delete
-          exclude: ".git* node_modules/* .next/*"
-          ssh_options: "-o StrictHostKeyChecking=no"
-          source: .
-          dest: ubuntu@36.255.71.38:/var/www/practice-ci-cd/
-
-
-      - name: Restart application
-        run: |
-          ssh ubuntu@36.255.71.38 'cd /var/www/practice-ci-cd/ && pm2 restart practice'
