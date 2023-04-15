@@ -17,7 +17,7 @@ export default function Home() {
               <span className="text-violet-400">With Github</span>Action
             </h1>
             <p className="mt-6 mb-8 text-lg sm:mb-12">
-               And Nginx, PM2
+               And Nginx, PM2 
               <br className="hidden md:inline lg:hidden" />
               at Brilliant Cloud
             </p>
