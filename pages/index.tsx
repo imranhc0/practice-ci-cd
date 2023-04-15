@@ -34,7 +34,7 @@ export default function Home() {
                 href="#"
                 className="px-8 py-3 text-lg font-semibold border rounded border-gray-100"
               >
-                Have Fun
+                Have Fun!
               </a>
             </div>
           </div>
