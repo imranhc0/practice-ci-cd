@@ -53,7 +53,7 @@ export default function Home() {
           <div className="mb-16 space-y-4 text-center">
             <h1 className="text-4xl font-semibold leading-tight">Pricing</h1>
             <p className="px-4 sm:px-8 lg:px-24">
-              This App deplyed with PM2 and Github Action | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta totam quaerat possimus enim omnis mollitia quod odit illo eius deserunt.
+              This App deplyed with PM2 and Github Action | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta totam quaerat possimus enim omnis mollitia quod odit illo eius deserunt. Haha
             </p>
             <div>
               <button className="px-4 py-1 font-semibold border rounded-l-lg bg-violet-400 border-violet-400 text-gray-900">
