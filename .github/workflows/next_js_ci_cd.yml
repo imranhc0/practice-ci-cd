@@ -1,27 +1,35 @@
-name: next js application
+name: Deploy to Server
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
+    branches:
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: self-hosted
     steps:
-    - name: Permitted as Root USER
-      run : sudo su
-    - name: Go to source code directory
-      run: cd /var/www/practice-ci-cd/
-    - name: Pull from repo
-      run: sudo git pull
-    - name: Build
-      run: npm run build
-    - name: Restart PM2 Worker 
-      run : pm2 restart all
-    - name: Showing Logs
-      run : pm2 logs
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Build application
+        run: |
+          npm run build
+
+      - name: Copy files to server
+        uses: appleboy/rsync-action@master
+        with:
+          args: -rltgoDzv --delete
+          exclude: ".git* node_modules/* .next/*"
+          ssh_options: "-o StrictHostKeyChecking=no"
+          source: .
+          dest: ubuntu@36.255.71.38:/var/www/practice-ci-cd/
+
+
+      - name: Restart application
+        run: |
+          ssh ubuntu@36.255.71.38 'cd /var/www/practice-ci-cd/ && pm2 restart practice'
