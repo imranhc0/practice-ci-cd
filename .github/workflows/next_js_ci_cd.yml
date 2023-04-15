@@ -35,8 +35,6 @@ jobs:
     steps:
     - name: Root user
       run : sudo su
-    - name: restart Production Server
-      run : pm2 restart practice
 
       
 
