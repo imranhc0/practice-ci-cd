@@ -33,7 +33,13 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
-    - name: Restart Production Server
+    - name: Root user
+      run : sudo su
+    - name: restart Production Server
       run : pm2 restart practice
+
+      
+
+
   
 
